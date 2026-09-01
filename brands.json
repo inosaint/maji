@@ -1,0 +1,28 @@
+{
+  "brands": [
+    {
+      "slug": "sukmaji",
+      "name": "Sukmaji Kumoro",
+      "kind": "Personal portfolio",
+      "source": "Sukmaji Kumoro, Portfolio 2026.pdf",
+      "stage": 3,
+      "stageName": "Mockup",
+      "current": "brands/sukmaji/research/explorations.html",
+      "stages": {
+        "1": "brands/sukmaji/research/brief.html",
+        "2": "brands/sukmaji/research/moodboard.html",
+        "3": "brands/sukmaji/research/explorations.html",
+        "4": null,
+        "5": null
+      },
+      "direction": "02 Marked-Up \u00b7 Crimson Pro + Epilogue",
+      "mockups": [
+        "brands/sukmaji/research/mockups/homepage.html",
+        "brands/sukmaji/research/mockups/work-airport-experience.html",
+        "brands/sukmaji/research/mockups/work-goride-instant.html",
+        "brands/sukmaji/research/mockups/work-ads-principles.html",
+        "brands/sukmaji/research/mockups/work-design-leadership.html"
+      ]
+    }
+  ]
+}

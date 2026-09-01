@@ -1,0 +1,261 @@
+/* ============================================================
+   Sukmaji Kumoro — site styles
+   Direction 02 "Marked-Up" · Crimson Pro + Epilogue
+   Shared by homepage.html and the work/* pages.
+   ============================================================ */
+:root{
+  /* anchored — sampled from Portfolio 2026 p.1 */
+  --blue:#4346EB;
+  --blue-deep:#2B2ECB;
+  --lavender:#A1A2F5;
+  --marker:#E3EB8F;
+  /* direction 02 roles */
+  --paper:#FBFBF6;
+  --paper-sunk:#F4F4ED;
+  --ink:#141534;
+  --ink-soft:#3D3E5F;
+  --ink-quiet:#6C6D8C;
+  --rule:#DEDED2;
+  --rule-soft:#E9E9DF;
+  --white:#FFFFFF;
+
+  --serif:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --sans:"Epilogue",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+
+  --gut:clamp(20px,5vw,64px);
+  --max:1240px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+     font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+     text-rendering:optimizeLegibility}
+img{max-width:100%;display:block}
+a{color:var(--blue);text-decoration-thickness:1px;text-underline-offset:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+
+/* the marker pen — deliberately off-register, wraps correctly */
+.mk{background-image:linear-gradient(var(--marker),var(--marker));
+    background-size:100% .58em;background-position:0 .74em;background-repeat:no-repeat;
+    padding:0 .14em;margin:0 -.06em;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone}
+/* the strike — real rule at x-height, never a fake underline */
+.st{color:var(--lavender);text-decoration:line-through;text-decoration-thickness:1.5px}
+
+.label{font-family:var(--sans);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+       font-weight:600;color:var(--ink-quiet);margin:0 0 22px}
+h2.sec{font-family:var(--serif);font-weight:600;font-size:clamp(32px,5vw,56px);line-height:1.04;
+       letter-spacing:-.025em;margin:0}
+
+/* ============================ HERO ============================ */
+/* Identity and proposition are one section: the name spans the full measure on
+   its own line, then the descriptor block and the proposition sit side by side. */
+.hero{background:var(--paper);color:var(--ink);overflow:hidden;
+      padding:clamp(76px,15vh,180px) 0 clamp(48px,7vh,80px);
+      border-bottom:1px solid var(--rule)}
+/* one line, always: 13vw keeps ~6.6em of italic Crimson Pro inside the gutters
+   at every width from 320px up, and 168px caps it on wide screens. */
+.hero h1{font-family:var(--serif);font-style:italic;font-weight:600;
+         font-size:min(13vw,168px);line-height:.92;letter-spacing:-.03em;
+         margin:0 0 clamp(30px,4.5vw,56px);text-align:left;white-space:nowrap;
+         color:var(--ink)}
+/* Proposition sits left, identity right. The switch is done with grid order so the
+   DOM keeps its reading order — name, descriptor, then proposition — which is what
+   stacks on narrow screens and what a screen reader follows. */
+.hero-row{display:grid;gap:clamp(28px,4vw,64px);
+          grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:start}
+.hero-id{order:2;margin-top:-20px}
+.hero-prop{order:1}
+.hero .descriptor{font-family:var(--serif);font-weight:600;
+         font-size:clamp(16px,2.1vw,26px);line-height:1.32;margin:0;
+         color:var(--ink);text-align:left}
+.hero .descriptor .st{font-weight:400;color:var(--ink-quiet)}
+.hero-prop{padding-top:20px}
+.hero-prop p{font-family:var(--serif);font-size:clamp(22px,2.7vw,35px);line-height:1.3;
+         letter-spacing:-.015em;margin:0;max-width:27ch;color:var(--ink)}
+
+/* ============================ SCOPE ============================ */
+.scope{padding:clamp(52px,8vw,96px) 0;border-bottom:1px solid var(--rule)}
+.scope-grid{display:grid;gap:34px;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);
+            align-items:start}
+.role-now{font-family:var(--serif);font-size:clamp(26px,3.4vw,38px);line-height:1.22;
+          letter-spacing:-.015em;margin:0 0 18px}
+.role-meta{font-family:var(--sans);font-size:14px;color:var(--ink-quiet);margin:0 0 26px}
+.groups{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:7px}
+.groups li{font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--ink-soft);
+           border:1px solid var(--rule);border-radius:999px;padding:6px 13px;background:var(--white)}
+.counts{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);
+        grid-template-columns:repeat(auto-fit,minmax(132px,1fr))}
+.count{background:var(--paper);padding:22px 20px 24px}
+.count .n{font-family:var(--serif);font-weight:600;font-size:46px;line-height:1;
+          letter-spacing:-.03em;display:block;color:var(--ink)}
+.count .t{font-family:var(--sans);font-size:12.5px;line-height:1.45;color:var(--ink-quiet);
+          display:block;margin-top:9px}
+.counterparts{margin:26px 0 0;font-family:var(--sans);font-size:14.5px;line-height:1.7;
+              color:var(--ink-soft);max-width:64ch}
+.counterparts b{color:var(--ink);font-weight:600}
+
+/* standing scope, reused as the "Role" section on the work pages */
+.role-scope{padding:clamp(48px,7vw,88px) 0;border-top:1px solid var(--rule);
+            border-bottom:1px solid var(--rule);margin-top:clamp(44px,6vw,76px);
+            background:var(--paper-sunk)}
+.role-scope .role-now{font-size:clamp(24px,3vw,34px)}
+
+/* ============================ WORK INDEX (cards) ============================ */
+.work{padding:clamp(52px,8vw,96px) 0;border-bottom:1px solid var(--rule)}
+.work-head{margin-bottom:clamp(26px,4vw,40px)}
+.work-head .label{margin-bottom:0}
+.cards{display:grid;gap:clamp(20px,2.6vw,30px);
+       grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{display:flex;flex-direction:column;text-decoration:none;color:inherit;
+      background:var(--white);border:1px solid var(--rule);border-radius:3px;overflow:hidden;
+      transition:border-color .18s, transform .18s, box-shadow .18s}
+.card:hover,.card:focus-visible{border-color:var(--blue);transform:translateY(-3px);
+      box-shadow:0 14px 30px rgba(20,21,52,.09)}
+.card .thumb{aspect-ratio:16/10;background:var(--paper-sunk);overflow:hidden;
+      border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:center}
+.card .thumb img{width:100%;height:100%;object-fit:cover;object-position:left top}
+/* typographic plate for the entry that has no diagram */
+.card .thumb.plate-type{background:var(--blue);padding:22px 24px;align-items:flex-start;
+      justify-content:flex-end;flex-direction:column;border-bottom-color:var(--blue)}
+.card .thumb.plate-type q{font-family:var(--serif);font-style:italic;font-weight:600;
+      font-size:clamp(19px,2.2vw,25px);line-height:1.24;color:var(--white);quotes:none;
+      letter-spacing:-.015em}
+.card .thumb.plate-type .attr{font-family:var(--sans);font-size:11px;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--marker);margin-top:14px}
+.card .body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.card .meta{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.card .num{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.14em;
+      color:var(--blue)}
+.card .years{font-family:var(--sans);font-size:11.5px;font-weight:500;letter-spacing:.1em;
+      color:var(--ink-quiet);margin-left:auto}
+.card h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:28px;
+      line-height:1.04;letter-spacing:-.02em;margin:0 0 12px;color:var(--ink)}
+.card p{margin:0 0 16px;font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
+.card .more{margin-top:auto;font-family:var(--sans);font-size:13px;font-weight:600;
+      color:var(--blue);display:inline-flex;align-items:center;gap:7px}
+.card:hover .more .arw,.card:focus-visible .more .arw{transform:translateX(4px)}
+.card .more .arw{transition:transform .18s}
+
+/* ============================ CASE PAGE ============================ */
+.case-hero{background:var(--paper);color:var(--ink);border-bottom:1px solid var(--rule);
+      padding:clamp(32px,5vw,56px) 0 clamp(38px,6vw,64px)}
+.case-hero .back{font-family:var(--serif);font-style:italic;font-size:19px;font-weight:600;
+      color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+      margin-bottom:clamp(30px,5vw,56px);transition:color .18s}
+.case-hero .back:hover,.case-hero .back:focus-visible{color:var(--blue)}
+.case-hero .num{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.16em;
+      color:var(--blue);margin:0 0 14px}
+.case-hero h1{font-family:var(--serif);font-style:italic;font-weight:600;
+      font-size:clamp(40px,8.5vw,104px);line-height:.94;letter-spacing:-.03em;margin:0 0 22px}
+.case-hero .years{font-family:var(--sans);font-size:14px;letter-spacing:.08em;color:var(--ink-quiet);margin:0}
+.case-hero .impact{font-family:var(--serif);font-size:clamp(21px,2.9vw,32px);line-height:1.34;
+      letter-spacing:-.012em;margin:clamp(30px,4vw,44px) 0 0;max-width:32ch;color:var(--ink)}
+
+.case-main{padding:clamp(48px,7vw,88px) 0 0}
+.case-grid{display:grid;gap:clamp(30px,4.5vw,60px);
+           grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:start}
+.dl{margin:0}
+.dl dt{font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+       font-weight:600;color:var(--ink-quiet);margin:0 0 10px;padding-top:20px;
+       border-top:1px solid var(--rule)}
+.dl dd{margin:0 0 26px;font-size:16px;line-height:1.7;color:var(--ink-soft)}
+.dl ul{margin:0;padding-left:19px}
+.dl li{margin-bottom:13px;font-size:16px;line-height:1.66;color:var(--ink-soft)}
+.dl li:last-child{margin-bottom:0}
+.dl b{color:var(--ink);font-weight:600}
+.plate{margin:0}
+.plate img{border:1px solid var(--rule);background:var(--white);width:100%}
+.plate figcaption{font-family:var(--sans);font-size:13px;line-height:1.55;color:var(--ink-quiet);
+                  margin-top:12px;max-width:56ch}
+.plate + .plate{margin-top:26px}
+
+/* beliefs, used on the thesis page */
+.beliefs{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);
+         grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:0}
+.belief{background:var(--white);padding:28px 26px 30px;display:flex;flex-direction:column}
+.belief .i{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;
+           color:var(--blue);margin:0 0 16px}
+.belief p{font-family:var(--serif);font-size:19px;line-height:1.46;margin:0;color:var(--ink)}
+.belief p em{font-style:italic}
+.belief .kicker{margin-top:auto;padding-top:20px;font-family:var(--sans);font-size:13px;
+                line-height:1.55;color:var(--ink-quiet)}
+
+/* pull quote band */
+.pull-band{background:var(--blue);color:var(--white);padding:clamp(52px,8vw,104px) 0;
+           margin-top:clamp(48px,7vw,88px)}
+.pull{margin:0;padding:0 0 0 26px;border-left:3px solid var(--marker);max-width:34ch}
+.pull p{font-family:var(--serif);font-style:italic;font-weight:600;
+        font-size:clamp(26px,4.6vw,54px);line-height:1.16;letter-spacing:-.025em;margin:0}
+.pull cite{display:block;margin-top:20px;font-family:var(--sans);font-style:normal;font-size:12px;
+        letter-spacing:.12em;text-transform:uppercase;color:var(--lavender)}
+
+/* prev / next between case pages */
+.pager{border-top:1px solid var(--rule);padding:clamp(34px,5vw,56px) 0 clamp(16px,2vw,24px)}
+.pager .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.pager a{text-decoration:none;color:inherit;max-width:44ch;transition:color .18s}
+.pager .dir{font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+        font-weight:600;color:var(--ink-quiet);display:block;margin-bottom:8px}
+.pager .ttl{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(22px,3vw,32px);
+        line-height:1.1;letter-spacing:-.02em;color:var(--ink);transition:color .18s}
+.pager a:hover .ttl,.pager a:focus-visible .ttl{color:var(--blue)}
+.pager .next{text-align:right;margin-left:auto}
+
+/* ============================ TRACK RECORD ============================ */
+.record{padding:clamp(52px,8vw,96px) 0;border-bottom:1px solid var(--rule)}
+.record-grid{display:grid;gap:clamp(28px,4vw,54px);
+             grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:start}
+.record p.body{font-size:16.5px;line-height:1.7;color:var(--ink-soft);margin:0 0 22px;max-width:56ch}
+.orgs{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.orgs li{border-bottom:1px solid var(--rule);padding:15px 0;font-family:var(--sans);
+         font-size:15.5px;color:var(--ink-soft);display:flex;gap:14px;align-items:baseline}
+.orgs li b{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);
+           letter-spacing:-.01em}
+.orgs li span{margin-left:auto;font-size:12.5px;color:var(--ink-quiet);text-align:right}
+.contrib{list-style:none;margin:0;padding:0}
+.contrib li{padding:16px 0 16px 30px;position:relative;border-bottom:1px solid var(--rule-soft);
+            font-size:15.5px;line-height:1.62;color:var(--ink-soft)}
+.contrib li:first-child{border-top:1px solid var(--rule-soft)}
+.contrib li::before{content:"";position:absolute;left:0;top:26px;width:14px;height:2px;background:var(--blue)}
+.contrib b{color:var(--ink);font-weight:600}
+
+/* ============================ NEXT ============================ */
+.next-sec{padding:clamp(52px,8vw,96px) 0;border-bottom:1px solid var(--rule)}
+.next-grid{display:grid;gap:clamp(24px,4vw,54px);grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr)}
+.next-sec p{font-family:var(--serif);font-size:clamp(19px,2.3vw,25px);line-height:1.46;
+        color:var(--ink-soft);margin:0 0 22px}
+.next-sec p:last-child{margin-bottom:0}
+.next-sec p strong{color:var(--ink);font-weight:600}
+
+/* ============================ CONTACT / FOOTER ============================ */
+.contact{padding:clamp(56px,9vw,110px) 0 clamp(40px,6vw,64px);margin-bottom:50px}
+.contact h2{font-family:var(--serif);font-style:italic;font-weight:600;
+            font-size:clamp(38px,7vw,84px);line-height:1;letter-spacing:-.03em;margin:0 0 26px}
+.contact .mail{font-family:var(--serif);font-size:clamp(22px,3.4vw,36px);color:var(--blue);
+               text-decoration:none;letter-spacing:-.01em;transition:.18s;display:inline-block}
+.contact .mail:hover,.contact .mail:focus-visible{color:var(--ink)}
+.contact .note{font-family:var(--sans);font-size:15px;color:var(--ink-quiet);max-width:52ch;margin:24px 0 0}
+
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:2px}
+.pull-band :focus-visible{outline-color:var(--marker)}
+
+/* ============================ RESPONSIVE ============================ */
+@media (max-width:1000px){
+  .scope-grid,.case-grid,.record-grid,.next-grid,.hero-row{grid-template-columns:1fr}
+  /* stacked: fall back to DOM order, and drop the desktop-only offsets */
+  .hero-id,.hero-prop{order:0}
+  .hero-id{margin-top:0}
+  .hero-prop{padding-top:0}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .count .n{font-size:38px}
+  .orgs li{flex-wrap:wrap;gap:6px}
+  .orgs li span{margin-left:0;width:100%;text-align:left}
+  .pager .wrap{flex-direction:column}
+  .pager .next{text-align:left;margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms!important}
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand Pipeline — Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Faustina:ital,wght@0,400;0,600;1,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0F1020;--card:#191A31;--ink:#F4F4FB;--dim:#9A9BC0;--rule:#2C2D4C;--accent:#E3EB8F;--blue:#4346EB}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;line-height:1.6}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  header{padding:64px 0 28px;border-bottom:1px solid var(--rule)}
+  h1{font-family:"Faustina",Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(34px,6vw,56px);margin:0 0 10px;letter-spacing:-.02em}
+  header p{color:var(--dim);margin:0;max-width:60ch}
+  .list{padding:36px 0 80px;display:grid;gap:16px}
+  .brand{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:26px 26px 24px;transition:.18s}
+  .brand:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .brand h2{font-family:"Faustina",Georgia,serif;font-style:italic;font-size:28px;font-weight:600;margin:0 0 4px}
+  .kind{color:var(--dim);font-size:13.5px;margin:0 0 20px}
+  .steps{display:flex;gap:6px;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+  .steps li{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;padding:5px 10px;border-radius:999px;border:1px solid var(--rule);color:var(--dim)}
+  .steps li.done{background:var(--accent);color:#141534;border-color:var(--accent);font-weight:600}
+  footer{border-top:1px solid var(--rule);padding:20px 0 48px;color:var(--dim);font-size:12.5px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Brand Pipeline</h1>
+  <p>Five stages — Brief, Moodboard, Mockup, Design System, Teaser. Each stage stops for review.</p>
+</div></header>
+<div class="wrap"><div class="list">
+  <a class="brand" href="brands/sukmaji/research/explorations.html">
+    <h2>Sukmaji Kumoro</h2>
+    <p class="kind">Personal portfolio · from “Sukmaji Kumoro, Portfolio 2026.pdf” · currently at Stage 3</p>
+    <ul class="steps">
+      <li class="done">1 · Brief</li><li class="done">2 · Moodboard</li><li class="done">3 · Mockup</li><li>4 · System</li><li>5 · Teaser</li>
+    </ul>
+  </a>
+</div></div>
+<footer><div class="wrap">Run with the <code>brand-pipeline</code> skill (SKILL.md).</div></footer>
+</body>
+</html>

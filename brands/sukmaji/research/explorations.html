@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explorations — Sukmaji Kumoro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,600&family=Epilogue:wght@400;500;600&family=Faustina:ital,wght@1,600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#4346EB;--blue-deep:#2B2ECB;--lavender:#A1A2F5;--marker:#E3EB8F;
+    --paper:#FFFFFF;--ink:#141534;--rule:rgba(255,255,255,.28);
+    --serif:"Faustina",Georgia,serif;
+    --sans:"Epilogue",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--blue);color:var(--paper);font-family:var(--sans);
+       font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  a{color:var(--marker)}
+
+  .topbar{position:sticky;top:0;z-index:30;background:var(--blue);border-bottom:1px solid var(--rule)}
+  .topbar .wrap{display:flex;align-items:center;gap:20px;min-height:60px;
+                padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .mark{font-family:var(--serif);font-style:italic;font-weight:600;font-size:19px;
+        color:var(--paper);text-decoration:none;white-space:nowrap;transition:color .18s}
+  .mark:hover,.mark:focus-visible{color:var(--marker)}
+  .steps{display:flex;gap:6px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+  .steps a,.steps span{display:block;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+        font-weight:500;padding:6px 11px;border-radius:999px;text-decoration:none;
+        border:1px solid transparent;transition:.18s}
+  .steps .active span{background:var(--marker);color:var(--ink);font-weight:600}
+  .steps .done a{color:var(--paper);border-color:var(--rule)}
+  .steps .done a:hover,.steps .done a:focus-visible{background:var(--paper);color:var(--blue);border-color:var(--paper)}
+  .steps .todo span{color:var(--lavender);border-color:rgba(255,255,255,.16);opacity:.75;cursor:default}
+
+  .masthead{padding:66px 0 50px;border-bottom:1px solid var(--rule)}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--marker);
+           font-weight:600;margin:0 0 22px}
+  h1{font-family:var(--serif);font-style:italic;font-weight:600;
+     font-size:clamp(40px,7.5vw,82px);line-height:.98;letter-spacing:-.025em;margin:0 0 20px}
+  .dek{max-width:70ch;color:#E7E7FE;margin:0}
+  .dek b{color:var(--paper)}
+  .chosen{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .tagpill{font-family:var(--mono);font-size:12px;background:var(--marker);color:var(--ink);
+           padding:6px 12px;border-radius:999px}
+
+  .section{padding:58px 0;border-bottom:1px solid var(--rule)}
+  .section-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+                 color:var(--marker);margin:0 0 8px}
+  .section-title{font-family:var(--serif);font-style:italic;font-weight:600;
+                 font-size:clamp(26px,4vw,40px);line-height:1.08;letter-spacing:-.02em;margin:0 0 24px}
+  .intro{max-width:70ch;color:#E2E2FC;margin:0 0 34px}
+
+  .refs{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .ref{background:var(--paper);color:var(--ink);border-radius:3px;padding:24px 22px 22px;
+       display:flex;flex-direction:column}
+  .ref .src{font-family:var(--mono);font-size:11.5px;color:var(--blue);margin:0 0 6px;word-break:break-all}
+  .ref h3{font-family:var(--serif);font-style:italic;font-size:24px;font-weight:600;margin:0 0 14px;
+          letter-spacing:-.01em}
+  .ref p{margin:0 0 12px;font-size:14.5px;line-height:1.6;color:#3D3E5F}
+  .ref .take{margin:auto 0 0;padding-top:14px;border-top:1px solid rgba(20,21,52,.12);
+             font-size:13px;line-height:1.55;color:#5B5C82}
+  .ref .take b{color:var(--blue-deep)}
+
+  .decisions{list-style:none;margin:0;padding:0;counter-reset:d}
+  .decisions li{counter-increment:d;position:relative;padding:18px 0 18px 46px;
+                border-top:1px solid var(--rule);font-size:15px;line-height:1.6;color:#E2E2FC}
+  .decisions li:last-child{border-bottom:1px solid var(--rule)}
+  .decisions li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:18px;
+                font-family:var(--mono);font-size:12px;color:var(--marker)}
+  .decisions b{color:var(--paper)}
+
+  /* preview frame */
+  .toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+  .toolbar button{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.04em;
+        background:transparent;color:var(--paper);border:1px solid var(--rule);border-radius:999px;
+        padding:8px 15px;cursor:pointer;transition:.18s}
+  .toolbar button:hover,.toolbar button:focus-visible{background:var(--paper);color:var(--blue);border-color:var(--paper)}
+  .toolbar button[aria-pressed="true"]{background:var(--marker);color:var(--ink);border-color:var(--marker)}
+  .toolbar .open-link{margin-left:auto;font-family:var(--sans);font-size:12.5px;font-weight:600;
+        color:var(--ink);background:var(--marker);border:1px solid var(--marker);border-radius:999px;
+        padding:8px 15px;text-decoration:none;transition:.18s}
+  .toolbar .open-link:hover,.toolbar .open-link:focus-visible{background:var(--paper);border-color:var(--paper);color:var(--blue)}
+  .stage{background:rgba(0,0,0,.16);border:1px solid var(--rule);padding:16px;display:flex;justify-content:center}
+  .stage iframe{width:100%;max-width:100%;height:78vh;min-height:520px;border:0;background:#FBFBF6;
+                transition:max-width .2s ease}
+  .stage[data-view="mobile"] iframe{max-width:390px}
+  .stage[data-view="tablet"] iframe{max-width:834px}
+  .frame-note{font-family:var(--mono);font-size:11.5px;color:var(--lavender);margin:12px 0 0}
+
+  .foot{padding:24px 0 48px;font-size:12px;color:var(--lavender);
+        display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .foot a{color:var(--lavender);text-decoration:none}
+  .foot a:hover,.foot a:focus-visible{color:var(--paper)}
+  :focus-visible{outline:2px solid var(--marker);outline-offset:3px}
+
+  @media (max-width:620px){
+    .masthead{padding:44px 0 36px}
+    .section{padding:40px 0}
+    .stage{padding:8px}
+    .toolbar .open-link{margin-left:0}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="../../../index.html">Sukmaji&nbsp;Kumoro</a>
+    <ol class="steps">
+      <li class="done"><a href="brief.html">1 · Brief</a></li>
+      <li class="done"><a href="moodboard.html">2 · Moodboard</a></li>
+      <li class="active"><span>3 · Mockup</span></li>
+      <li class="todo"><span>4 · System</span></li>
+      <li class="todo"><span>5 · Teaser</span></li>
+    </ol>
+  </div>
+</header>
+
+<main>
+  <section class="masthead">
+    <div class="wrap">
+      <p class="eyebrow">Stage 3 — Explorations &amp; Mockup</p>
+      <h1>The homepage,<br>marked up</h1>
+      <p class="dek">Direction 02 confirmed with pairing 02·B. One change carried over from Direction 01,
+      as recommended: the page still <b>opens on the blue wall</b> before dropping to paper for the
+      argument. Everything on the page is your real content from the Portfolio 2026 PDF — no lorem, no
+      invented metrics.</p>
+      <div class="chosen">
+        <span class="tagpill">Direction 02 · Marked-Up</span>
+        <span class="tagpill">Crimson Pro + Epilogue</span>
+        <span class="tagpill">#4346EB / #FBFBF6 / #E3EB8F / #A1A2F5</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== category research ===== -->
+  <section class="section">
+    <div class="wrap">
+      <p class="section-label">Category research</p>
+      <h2 class="section-title">What design-leadership sites actually do</h2>
+      <p class="intro">Three comparable sites, read for structure rather than style — all belong to
+      senior design leaders selling judgement rather than craft output. The pattern is remarkably
+      consistent, and it is <em>not</em> the pattern of an IC portfolio.</p>
+      <div class="refs">
+
+        <article class="ref">
+          <p class="src">juliezhuo.com</p>
+          <h3>Julie Zhuo</h3>
+          <p>Opens with the name, then a vertical list of roles — founder, author, essayist — before
+          anything else. Work is a plain linked list of writing and talks; no thumbnails, no grid, no
+          hero image at all.</p>
+          <p class="take"><b>Taken:</b> state role and scope in the first screen as plain text. <b>Left:</b>
+          a pure link list is too thin here — Sukmaji's evidence is metric-based and needs the numbers
+          visible.</p>
+        </article>
+
+        <article class="ref">
+          <p class="src">petermerholz.com</p>
+          <h3>Peter Merholz</h3>
+          <p>Single column, generous whitespace, hierarchy carried almost entirely by type size. Leads
+          with a one-sentence statement of what he does <em>for</em> organizations. Contact appears
+          twice — in the nav and again in the footer.</p>
+          <p class="take"><b>Taken:</b> the one-sentence proposition as the first thing on paper, and
+          contact in both nav and footer. The org-effectiveness framing is very close to Sukmaji's own.</p>
+        </article>
+
+        <article class="ref">
+          <p class="src">danmall.com</p>
+          <h3>Dan Mall</h3>
+          <p>Front-loads credibility hard: named executives, follower counts, "hundreds of articles
+          since 2005." Work is presented as flagship ideas rather than client case studies.</p>
+          <p class="take"><b>Taken:</b> a numbers band early — but sourced from business outcomes and
+          headcount, not vanity metrics. <b>Left:</b> testimonials and CTAs stacked toward a product
+          funnel; wrong register for structural candour.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== decisions ===== -->
+  <section class="section">
+    <div class="wrap">
+      <p class="section-label">Structural decisions</p>
+      <h2 class="section-title">How the research changed the build</h2>
+      <ol class="decisions">
+        <li><b>Blue hero, then paper.</b> The hero reproduces the cover — right-hand axis, huge italic
+        wordmark, the strike line, the highlighter rule, the quiet email. Then the page drops to
+        <span style="font-family:var(--mono)">#FBFBF6</span> so 1,500 words of argument stay readable.</li>
+        <li><b>Proposition before credentials.</b> Following Merholz: one sentence in Crimson Pro at
+        display size — "I build the collaboration structures that let siloed product groups ship one
+        coherent experience" — with the marker on the operative phrase.</li>
+        <li><b>Scope as a numbers band, not prose.</b> 7 / 16 / 2 / 4 set as large numerals, with the
+        counterpart map underneath as running text. This is the single fastest thing an executive
+        reader needs.</li>
+        <li><b>Four entries, each on its own page.</b> The homepage carries image + title +
+        description per entry; the full Impact → Role → What's interesting lives on
+        <span style="font-family:var(--mono)">work-*.html</span>. Prev/next pagers link them into a ring.</li>
+        <li><b>Principles &amp; Philosophy is entry 04</b>, cited as design leadership — sitting beside
+        the case studies rather than under them. Track record and the 2026 theme moved onto that page,
+        which leaves the homepage lean: hero, proposition, scope, four cards, contact.</li>
+        <li><b>Diagrams promoted over screens.</b> The service blueprint, the paired customer/driver
+        flow and the ads audit swimlane are the hero images. Entry 04 has no diagram, so it gets a
+        typographic plate built in CSS rather than a faked screenshot.</li>
+        <li><b>No section nav.</b> Removed at review — the header is now just the wordmark and one
+        Contact button. Five anchor links on a short page was nav theatre.</li>
+        <li><b>Hero re-composed.</b> Wordmark top-left, the descriptor/rule/email cluster anchored
+        bottom-right — a diagonal rather than a single right-hand stack.</li>
+        <li><b>Mobile.</b> Breakpoints at 1000px and 760px; hero cluster re-rags left; the pager
+        stacks. With the nav gone there is no hamburger to get wrong.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== preview ===== -->
+  <section class="section" style="border-bottom:0">
+    <div class="wrap">
+      <p class="section-label">Live mockup</p>
+      <h2 class="section-title">homepage.html + 4 work pages</h2>
+      <div class="toolbar" role="group" aria-label="Preview width">
+        <button type="button" data-view="desktop" aria-pressed="true">Desktop</button>
+        <button type="button" data-view="tablet" aria-pressed="false">Tablet · 834</button>
+        <button type="button" data-view="mobile" aria-pressed="false">Mobile · 390</button>
+        <a class="open-link" href="mockups/homepage.html" target="_blank" rel="noopener">Open full page ↗</a>
+      </div>
+      <div class="stage" id="stage" data-view="desktop">
+        <iframe src="mockups/homepage.html" title="Sukmaji Kumoro homepage mockup" loading="lazy"></iframe>
+      </div>
+      <p class="frame-note">The iframe is a viewport simulation — for a true mobile check, open the full
+      page and resize the browser.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;width:100%">
+    <span>Stage 3 of 5 · Mockup · awaiting review</span>
+    <span><a href="mailto:sukmaji@kumoro.com">sukmaji@kumoro.com</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var stage = document.getElementById('stage');
+  var btns  = document.querySelectorAll('.toolbar button[data-view]');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      btns.forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      stage.setAttribute('data-view', b.getAttribute('data-view'));
+    });
+  });
+})();
+</script>
+</body>
+</html>

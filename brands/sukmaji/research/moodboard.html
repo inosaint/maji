@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moodboard — Sukmaji Kumoro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,600&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Chivo:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Epilogue:ital,wght@0,400;0,600;0,800;1,400&family=Familjen+Grotesk:ital,wght@0,400;0,600;0,700;1,400&family=Faustina:ital,wght@0,400;0,600;1,400;1,600&family=Hanken+Grotesk:ital,wght@0,400;0,600;1,400&family=Instrument+Serif:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#4346EB; --blue-deep:#2B2ECB; --lavender:#A1A2F5;
+    --highlight:#E3EB8F; --paper:#FFFFFF; --ink:#141534;
+    --rule:rgba(255,255,255,.28);
+    --serif:"Faustina",Palatino,Georgia,serif;
+    --sans:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--blue);color:var(--paper);font-family:var(--sans);
+       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+  /* ---------- stepper topbar ---------- */
+  .topbar{position:sticky;top:0;z-index:30;background:var(--blue);border-bottom:1px solid var(--rule)}
+  .topbar .wrap{display:flex;align-items:center;gap:20px;min-height:60px;
+                padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .mark{font-family:var(--serif);font-style:italic;font-weight:600;font-size:19px;
+        letter-spacing:-.01em;white-space:nowrap;color:var(--paper);text-decoration:none}
+  .mark:hover{color:var(--highlight)}
+  .steps{display:flex;gap:6px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+  .steps a,.steps span{display:block;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+        font-weight:500;padding:6px 11px;border-radius:999px;text-decoration:none;
+        border:1px solid transparent;transition:.18s}
+  .steps .active span{background:var(--highlight);color:var(--ink);font-weight:600}
+  .steps .done a{color:var(--paper);border-color:var(--rule)}
+  .steps .done a:hover{background:var(--paper);color:var(--blue);border-color:var(--paper)}
+  .steps .todo span{color:var(--lavender);border-color:rgba(255,255,255,.16);opacity:.75;cursor:default}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding:70px 0 54px;border-bottom:1px solid var(--rule)}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--highlight);
+           font-weight:600;margin:0 0 24px}
+  h1{font-family:var(--serif);font-style:italic;font-weight:600;
+     font-size:clamp(42px,8vw,88px);line-height:.96;letter-spacing:-.025em;margin:0 0 22px}
+  .dek{max-width:68ch;color:#E7E7FE;font-size:16.5px;margin:0}
+  .dek b{color:var(--paper)}
+
+  .section{padding:64px 0;border-bottom:1px solid var(--rule)}
+  .section-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+                 color:var(--highlight);margin:0 0 8px}
+  .section-title{font-family:var(--serif);font-style:italic;font-weight:600;
+                 font-size:clamp(28px,4.4vw,44px);line-height:1.06;letter-spacing:-.02em;margin:0 0 26px}
+  .section p.intro{max-width:70ch;color:#E2E2FC;margin:0 0 34px}
+
+  /* ---------- reference read ---------- */
+  .ref{display:grid;gap:34px;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:start}
+  .ref figure{margin:0}
+  .ref img{width:100%;display:block;border:1px solid var(--rule)}
+  .ref figcaption{margin-top:10px;font-size:12px;color:var(--lavender);font-family:var(--mono)}
+  .obs{list-style:none;margin:0;padding:0;counter-reset:o}
+  .obs li{counter-increment:o;padding:16px 0 16px 46px;position:relative;
+          border-top:1px solid var(--rule);font-size:14.6px;line-height:1.56;color:#E2E2FC}
+  .obs li:last-child{border-bottom:1px solid var(--rule)}
+  .obs li::before{content:counter(o,decimal-leading-zero);position:absolute;left:0;top:16px;
+          font-family:var(--mono);font-size:12px;color:var(--highlight)}
+  .obs b{color:var(--paper);font-weight:600}
+
+  /* ---------- anchored palette ---------- */
+  .anchor{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+          border:1px solid var(--rule)}
+  .anchor div{padding:0;border-right:1px solid var(--rule)}
+  .anchor div:last-child{border-right:0}
+  .chip{height:96px;display:block}
+  .anchor .lab{padding:14px 16px 18px;font-size:12px;line-height:1.45}
+  .anchor .hex{font-family:var(--mono);font-size:13px;color:var(--paper);display:block;margin-bottom:5px}
+  .anchor .role{color:var(--lavender)}
+
+  /* ---------- direction blocks ---------- */
+  .dir{border-bottom:1px solid var(--rule);padding:70px 0}
+  .dir:last-of-type{border-bottom:0}
+  .dir-head{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;margin-bottom:14px}
+  .dir-num{font-family:var(--mono);font-size:13px;color:var(--highlight)}
+  .dir-name{font-family:var(--serif);font-style:italic;font-weight:600;
+            font-size:clamp(30px,5vw,52px);line-height:1;letter-spacing:-.02em;margin:0}
+  .dir-thesis{max-width:72ch;color:#E2E2FC;margin:0 0 38px;font-size:16px}
+  .dir-thesis b{color:var(--paper)}
+
+  .sub{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+       color:var(--highlight);margin:0 0 16px}
+
+  /* swatch strip */
+  .swatches{display:flex;flex-wrap:wrap;border:1px solid var(--rule);margin-bottom:44px}
+  .sw{flex:1 1 150px;min-width:150px;border-right:1px solid var(--rule)}
+  .sw:last-child{border-right:0}
+  .sw .fill{height:88px}
+  .sw .info{padding:12px 14px 16px;font-size:11.5px;line-height:1.5}
+  .sw .hex{font-family:var(--mono);font-size:12.5px;color:var(--paper);display:block}
+  .sw .role{color:var(--lavender);display:block;margin-top:4px;
+            letter-spacing:.06em;text-transform:uppercase}
+  .sw .use{color:#C9CAF6;display:block;margin-top:6px;text-transform:none;letter-spacing:0}
+
+  /* type pairings */
+  .pairs{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-bottom:40px}
+  .pair{background:var(--paper);color:var(--ink);border-radius:3px;padding:26px 24px 24px;
+        display:flex;flex-direction:column}
+  .pair .tag{font-family:var(--mono);font-size:11px;color:var(--blue);margin:0 0 4px}
+  .pair .names{font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--ink);
+               margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid rgba(20,21,52,.14);
+               letter-spacing:.01em}
+  .pair .names span{color:#6B6C90;font-weight:400}
+  .spec-h{margin:0 0 12px;line-height:1;letter-spacing:-.025em;color:var(--ink)}
+  .spec-sub{margin:0 0 14px;font-size:14px;line-height:1.35;color:#3A3B5E}
+  .spec-b{margin:0 0 16px;font-size:14px;line-height:1.62;color:#3A3B5E}
+  .pair .why{margin:auto 0 0;padding-top:14px;border-top:1px solid rgba(20,21,52,.1);
+             font-family:var(--sans);font-size:12.5px;line-height:1.5;color:#5B5C82}
+  .pair .why b{color:var(--blue-deep)}
+  .pair .cat{display:inline-block;font-family:var(--sans);font-size:10.5px;letter-spacing:.1em;
+             text-transform:uppercase;font-weight:600;background:var(--highlight);color:var(--ink);
+             padding:3px 8px;border-radius:999px;margin-bottom:14px}
+
+  /* imagery prose */
+  .imagery{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .imagery p{margin:0;font-size:14.8px;line-height:1.65;color:#E2E2FC}
+  .imagery p b{color:var(--paper)}
+  .imagery .no{color:var(--lavender);font-size:13.5px}
+
+  /* recommendation */
+  .rec{background:var(--highlight);color:var(--ink);padding:38px 34px;border-radius:4px}
+  .rec h3{font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(24px,3.4vw,34px);
+          margin:0 0 14px;letter-spacing:-.02em}
+  .rec p{max-width:74ch;margin:0 0 12px;font-size:15px;color:#2E3010;line-height:1.62}
+  .rec p:last-child{margin-bottom:0}
+  .rec b{color:var(--ink)}
+  .rec code{font-family:var(--mono);font-size:13px;background:rgba(20,21,52,.1);padding:2px 6px;border-radius:3px}
+
+  .foot{padding:24px 0 48px;font-size:12px;color:var(--lavender);
+        display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .foot a{color:var(--lavender)}
+  .foot a:hover{color:var(--paper)}
+
+  @media (max-width:840px){ .ref{grid-template-columns:1fr} }
+  @media (max-width:620px){
+    .masthead{padding:46px 0 38px}
+    .section,.dir{padding:44px 0}
+    .rec{padding:28px 22px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="../../../index.html">Sukmaji&nbsp;Kumoro</a>
+    <ol class="steps">
+      <li class="done"><a href="brief.html">1 · Brief</a></li>
+      <li class="active"><span>2 · Moodboard</span></li>
+      <li class="done"><a href="explorations.html">3 · Mockup</a></li>
+      <li class="todo"><span>4 · System</span></li>
+      <li class="todo"><span>5 · Teaser</span></li>
+    </ol>
+  </div>
+</header>
+
+<main>
+  <section class="masthead">
+    <div class="wrap">
+      <p class="eyebrow">Stage 2 — Moodboard &amp; Directions</p>
+      <h1>Three ways to<br>build the frame</h1>
+      <p class="dek">You supplied one reference: <b>page 1 of the Portfolio 2026 deck</b>. Everything below is
+      derived from it. Colour is <b>anchored</b> — the four values are sampled straight out of that page, not
+      invented. Type is <b>open</b> — the deck's own humanist italic appears as exactly one option among nine,
+      and it has to win on merit. Tone keyword from Stage 1: <b>structural candour</b>.</p>
+    </div>
+  </section>
+
+  <!-- ============ READING THE REFERENCE ============ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="section-label">The reference</p>
+      <h2 class="section-title">What the cover actually does</h2>
+      <div class="ref">
+        <figure>
+          <img src="inspiration/cover.png" alt="Portfolio 2026 cover: white italic serif wordmark on flat electric blue, with a struck-through descriptor line and a single pale yellow-green rule">
+          <figcaption>inspiration/cover.png — Portfolio 2026, p.1</figcaption>
+        </figure>
+        <ul class="obs">
+          <li><b>A flat, unmodulated field.</b> No gradient, no texture, no photograph, no shadow. The blue is
+          a wall, not a background — which means the whole design rests on typography and interval.</li>
+          <li><b>One hard right-hand axis.</b> The wordmark's right edge, the yellow-green rule's right edge and
+          the email's right edge all land on the same vertical. Everything hangs from that line; the left side
+          is left deliberately ragged.</li>
+          <li><b>Roughly 60% of the page is empty.</b> The confidence is in the restraint. Any direction that
+          fills the space with content or decoration loses the source's whole character.</li>
+          <li><b>The strikethrough is the idea, not an effect.</b> <s>Architectural</s> <s>Industrial</s>
+          <s>Interface</s> <b>Designer</b> — the struck words are tinted back to ~50%, the survivor is full white.
+          This is a person editing his own definition in public. It is the single most reusable device in the deck.</li>
+          <li><b>The highlighter rule appears once, alone.</b> Solid <span style="font-family:var(--mono)">#E3EB8F</span>,
+          long and thin (~1:85), floating in the lower right. On inner pages the same colour becomes a literal
+          marker-pen highlight behind headings and impact numbers. So it has two jobs: <b>rule</b> and
+          <b>emphasis</b> — the system should keep both.</li>
+          <li><b>The email is quiet, not loud.</b> Set in the tinted lavender, not white. Contact is present
+          but refuses to shout — worth preserving rather than converting into a big CTA button.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ANCHORED PALETTE ============ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="section-label">Anchored — not up for debate</p>
+      <h2 class="section-title">Four sampled values</h2>
+      <p class="intro">Pulled by pixel-count from the cover render. Every direction below uses these same four
+      hues; what changes is which one is the <em>ground</em>, which one is the <em>ink</em>, and how much
+      the highlighter is allowed to do.</p>
+      <div class="anchor">
+        <div><span class="chip" style="background:#4346EB;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)"></span>
+          <p class="lab"><span class="hex">#4346EB</span><span class="role">Electric blue · 1,566,056 px — the field</span></p></div>
+        <div><span class="chip" style="background:#FFFFFF"></span>
+          <p class="lab"><span class="hex">#FFFFFF</span><span class="role">Paper white · 44,234 px — the wordmark</span></p></div>
+        <div><span class="chip" style="background:#E3EB8F"></span>
+          <p class="lab"><span class="hex">#E3EB8F</span><span class="role">Highlighter · 8,790 px — rule &amp; emphasis</span></p></div>
+        <div><span class="chip" style="background:#A1A2F5"></span>
+          <p class="lab"><span class="hex">#A1A2F5</span><span class="role">Lavender · 6,486 px — struck &amp; secondary</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- DIRECTION 01 -->
+  <!-- ============================================================ -->
+  <section class="dir">
+    <div class="wrap">
+      <div class="dir-head">
+        <span class="dir-num">DIRECTION 01</span>
+        <h2 class="dir-name">The Blue Field</h2>
+      </div>
+      <p class="dir-thesis">Maximum fidelity to the reference. The site <b>is</b> the cover, unrolled — one
+      continuous electric-blue wall, white type hanging off a right-hand axis, the highlighter rule doing the
+      section-breaking. Case studies arrive as white "cards" cut into the blue, which is exactly what pages
+      5–7 of the deck already do. <b>Risk:</b> sustained saturated blue is demanding over a long scroll;
+      it needs generous intervals to stay comfortable.</p>
+
+      <p class="sub">Palette — roles</p>
+      <div class="swatches">
+        <div class="sw"><div class="fill" style="background:#4346EB;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)"></div>
+          <div class="info"><span class="hex">#4346EB</span><span class="role">Ground</span><span class="use">The full-bleed field, everywhere</span></div></div>
+        <div class="sw"><div class="fill" style="background:#FFFFFF"></div>
+          <div class="info"><span class="hex">#FFFFFF</span><span class="role">Ink</span><span class="use">Headlines, body, case-study surfaces</span></div></div>
+        <div class="sw"><div class="fill" style="background:#A1A2F5"></div>
+          <div class="info"><span class="hex">#A1A2F5</span><span class="role">Ink-muted</span><span class="use">Struck words, captions, metadata</span></div></div>
+        <div class="sw"><div class="fill" style="background:#E3EB8F"></div>
+          <div class="info"><span class="hex">#E3EB8F</span><span class="role">Accent</span><span class="use">Rules, active nav, impact numbers</span></div></div>
+        <div class="sw"><div class="fill" style="background:#2B2ECB"></div>
+          <div class="info"><span class="hex">#2B2ECB</span><span class="role">Ground-deep</span><span class="use">Derived; alternating bands, hovers</span></div></div>
+        <div class="sw"><div class="fill" style="background:#141534"></div>
+          <div class="info"><span class="hex">#141534</span><span class="role">Ink-on-white</span><span class="use">Derived; type inside white cards</span></div></div>
+      </div>
+
+      <p class="sub">Type — three genuinely different answers</p>
+      <div class="pairs">
+
+        <article class="pair">
+          <p class="tag">01·A</p>
+          <p class="names">Faustina <span>+ Archivo</span></p>
+          <span class="cat">Humanist serif</span>
+          <h3 class="spec-h" style="font-family:'Faustina',Georgia,serif;font-style:italic;font-weight:600;font-size:44px">Sukmaji Kumoro</h3>
+          <p class="spec-sub" style="font-family:'Faustina',Georgia,serif;font-weight:400">
+            <s style="opacity:.5">Architectural</s> <s style="opacity:.5">Industrial</s> <s style="opacity:.5">Interface</s> <b>Designer</b></p>
+          <p class="spec-b" style="font-family:'Archivo',sans-serif">Airports are high-AOV/low-CO bookings, requiring
+          timely and accurate dispatch to happen in complex, site-specific contexts.</p>
+          <p class="why"><b>Closest to the deck.</b> Faustina is the humanist old-style the cover is already
+          reaching for — warm, calligraphic italic, holds up huge. Archivo is a workhorse grotesk that stays
+          out of its way. Safe, continuous, slightly conservative.</p>
+        </article>
+
+        <article class="pair">
+          <p class="tag">01·B</p>
+          <p class="names">Bodoni Moda <span>+ Familjen Grotesk</span></p>
+          <span class="cat">Didone display</span>
+          <h3 class="spec-h" style="font-family:'Bodoni Moda',Didot,serif;font-style:italic;font-weight:600;font-size:46px">Sukmaji Kumoro</h3>
+          <p class="spec-sub" style="font-family:'Bodoni Moda',Didot,serif;font-weight:400">
+            <s style="opacity:.5">Architectural</s> <s style="opacity:.5">Industrial</s> <s style="opacity:.5">Interface</s> <b>Designer</b></p>
+          <p class="spec-b" style="font-family:'Familjen Grotesk',sans-serif">Airports are high-AOV/low-CO bookings,
+          requiring timely and accurate dispatch to happen in complex, site-specific contexts.</p>
+          <p class="why"><b>Sharper, more editorial.</b> High-contrast hairlines cut against the flat blue the way
+          the deck's thin yellow rule does — the whole page becomes an exercise in thin lines. Familjen Grotesk
+          has a little Nordic quirk that keeps it from reading as luxury-fashion.</p>
+        </article>
+
+        <article class="pair">
+          <p class="tag">01·C</p>
+          <p class="names">Syne <span>+ Hanken Grotesk</span></p>
+          <span class="cat">Idiosyncratic display · no serif</span>
+          <h3 class="spec-h" style="font-family:'Syne',sans-serif;font-weight:800;font-size:38px;letter-spacing:-.01em">Sukmaji Kumoro</h3>
+          <p class="spec-sub" style="font-family:'Syne',sans-serif;font-weight:600;font-size:13px">
+            <s style="opacity:.5">Architectural</s> <s style="opacity:.5">Industrial</s> <s style="opacity:.5">Interface</s> <b>Designer</b></p>
+          <p class="spec-b" style="font-family:'Hanken Grotesk',sans-serif">Airports are high-AOV/low-CO bookings,
+          requiring timely and accurate dispatch to happen in complex, site-specific contexts.</p>
+          <p class="why"><b>The real break.</b> Drops the serif entirely. Syne's widened, slightly wrong-looking
+          forms read as contemporary art-institution rather than consultancy — it makes "Architectural Industrial"
+          literal. Hanken Grotesk keeps long case-study prose readable underneath.</p>
+        </article>
+
+      </div>
+
+      <p class="sub">Imagery &amp; texture</p>
+      <div class="imagery">
+        <p><b>Nothing photographic.</b> The reference has no images at all, and the honest extension of that is
+        to let the product artefacts you already own be the only pictures: the current-flow/proposed-flow service
+        blueprint, the queue screen from Terminal 3, the GoFood homepage. They sit on white plates floating in
+        the blue, with a 1px lavender hairline, no drop shadow, no device mockup frames.</p>
+        <p><b>Texture comes from interval, not material.</b> Very large vertical gaps between sections — 160px+
+        on desktop — so the blue is allowed to be empty in the same proportion the cover is. The only recurring
+        graphic element is the yellow-green rule, reused at three fixed widths.</p>
+        <p class="no"><b>Explicitly avoided:</b> gradients, mesh blobs, glass blur, noise overlays, floating 3D
+        shapes, stock office photography, phone-in-hand renders. None of it exists in the source and all of it
+        would violate structural candour.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- DIRECTION 02 -->
+  <!-- ============================================================ -->
+  <section class="dir">
+    <div class="wrap">
+      <div class="dir-head">
+        <span class="dir-num">DIRECTION 02</span>
+        <h2 class="dir-name">Marked-Up</h2>
+      </div>
+      <p class="dir-thesis">Takes the <b>strikethrough and the highlighter</b> — not the blue — as the real idea,
+      and inverts the ground. Warm paper, near-black ink, blue demoted to a link-and-label colour, and the
+      yellow-green used as an actual marker pen: behind impact numbers, behind case-study titles, exactly as
+      pages 5–7 of your deck already use it. The site reads as <b>a working document someone has been editing</b>,
+      which is a very direct expression of "the organization's maturity is my deliverable." <b>Risk:</b> gives
+      up the instant recognisability of the blue wall — the blue survives only in flashes.</p>
+
+      <p class="sub">Palette — roles</p>
+      <div class="swatches">
+        <div class="sw"><div class="fill" style="background:#FBFBF6;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)"></div>
+          <div class="info"><span class="hex">#FBFBF6</span><span class="role">Ground</span><span class="use">Derived warm paper, not pure white</span></div></div>
+        <div class="sw"><div class="fill" style="background:#141534"></div>
+          <div class="info"><span class="hex">#141534</span><span class="role">Ink</span><span class="use">All body and headline type</span></div></div>
+        <div class="sw"><div class="fill" style="background:#4346EB"></div>
+          <div class="info"><span class="hex">#4346EB</span><span class="role">Brand / link</span><span class="use">Labels, links, one full-bleed hero band</span></div></div>
+        <div class="sw"><div class="fill" style="background:#E3EB8F"></div>
+          <div class="info"><span class="hex">#E3EB8F</span><span class="role">Marker</span><span class="use">Literal highlight behind numbers &amp; titles</span></div></div>
+        <div class="sw"><div class="fill" style="background:#A1A2F5"></div>
+          <div class="info"><span class="hex">#A1A2F5</span><span class="role">Struck</span><span class="use">Deleted words, timestamps, footnotes</span></div></div>
+        <div class="sw"><div class="fill" style="background:#DEDED2"></div>
+          <div class="info"><span class="hex">#DEDED2</span><span class="role">Rule</span><span class="use">Derived; hairlines, table borders</span></div></div>
+      </div>
+
+      <p class="sub">Type — three genuinely different answers</p>
+      <div class="pairs">
+
+        <article class="pair">
+          <p class="tag">02·A</p>
+          <p class="names">Instrument Serif <span>+ Chivo</span></p>
+          <span class="cat">High-contrast display serif</span>
+          <h3 class="spec-h" style="font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;font-size:50px">Sukmaji Kumoro</h3>
+          <p class="spec-sub" style="font-family:'Instrument Serif',Georgia,serif;font-size:17px">
+            <s style="opacity:.5">Architectural</s> <s style="opacity:.5">Industrial</s> <s style="opacity:.5">Interface</s> <b>Designer</b></p>
+          <p class="spec-b" style="font-family:'Chivo',sans-serif">We treated “public disruption” — congestion,
+          crowding — as a primary failure metric to ensure operational stability.</p>
+          <p class="why"><b>Elegant and very light-footed.</b> Instrument Serif is nearly weightless at display
+          size, so a paper ground doesn't feel heavy. Chivo is a sturdy, slightly mechanical grotesk that carries
+          numbers and tables well — useful given how metric-dense the case studies are.</p>
+        </article>
+
+        <article class="pair">
+          <p class="tag">02·B</p>
+          <p class="names">Crimson Pro <span>+ Epilogue</span></p>
+          <span class="cat">Literary old-style</span>
+          <h3 class="spec-h" style="font-family:'Crimson Pro',Georgia,serif;font-style:italic;font-weight:600;font-size:44px">Sukmaji Kumoro</h3>
+          <p class="spec-sub" style="font-family:'Crimson Pro',Georgia,serif;font-size:16px">
+            <s style="opacity:.5">Architectural</s> <s style="opacity:.5">Industrial</s> <s style="opacity:.5">Interface</s> <b>Designer</b></p>
+          <p class="spec-b" style="font-family:'Epilogue',sans-serif">We treated “public disruption” — congestion,
+          crowding — as a primary failure metric to ensure operational stability.</p>
+          <p class="why"><b>The essay register.</b> Crimson Pro is a book face; it makes the Operating Thesis read
+          like something written rather than presented. Epilogue's flat terminals stop it drifting into
+          nostalgia. Best of the nine if the thesis is the emotional centre of the site.</p>
+        </article>
+
+        <article class="pair">
+          <p class="tag">02·C</p>
+          <p class="names">Familjen Grotesk <span>+ Literata</span></p>
+          <span class="cat">Inverted — sans display, serif body</span>
+          <h3 class="spec-h" style="font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:40px;letter-spacing:-.03em">Sukmaji Kumoro</h3>
+          <p class="spec-sub" style="font-family:'Familjen Grotesk',sans-serif;font-weight:600;font-size:14px">
+            <s style="opacity:.5">Architectural</s> <s style="opacity:.5">Industrial</s> <s style="opacity:.5">Interface</s> <b>Designer</b></p>
+          <p class="spec-b" style="font-family:'Literata',Georgia,serif">We treated “public disruption” — congestion,
+          crowding — as a primary failure metric to ensure operational stability.</p>
+          <p class="why"><b>Structurally the opposite move.</b> Headlines get the sans; the long-form argument gets
+          the serif. Reads less like a designer's portfolio and more like a policy paper — which, given ethics and
+          governance are your actual subject matter, may be the more honest costume.</p>
+        </article>
+
+      </div>
+
+      <p class="sub">Imagery &amp; texture</p>
+      <div class="imagery">
+        <p><b>The marker pen is the texture.</b> Highlight spans sit slightly off-register — a couple of pixels
+        wider than the word, baseline nudged down — so they read as applied by hand rather than as a CSS
+        background. Struck words keep a real 1.5px rule at mid-x-height, never a fake underline.</p>
+        <p><b>Artefacts shown as documents, not products.</b> The service blueprint is the star here: reproduced
+        large, full-width, on paper, with the annotations legible. Screens get a thin <span style="font-family:var(--mono);color:#C9CAF6">#DEDED2</span>
+        border and a caption in lavender, like plates in a report.</p>
+        <p class="no"><b>Explicitly avoided:</b> paper-grain images, coffee stains, skeuomorphic torn edges,
+        handwriting fonts. The "document" quality comes from structure, margin and rules — not from pretending
+        to be printed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- DIRECTION 03 -->
+  <!-- ============================================================ -->
+  <section class="dir">
+    <div class="wrap">
+      <div class="dir-head">
+        <span class="dir-num">DIRECTION 03</span>
+        <h2 class="dir-name">Load-Bearing</h2>
+      </div>
+      <p class="dir-thesis">Takes the struck words <s style="opacity:.55">Architectural</s>
+      <s style="opacity:.55">Industrial</s> at face value and builds the frame in public: a visible column grid,
+      hairline rules that actually meet, technical labels, and metrics set in mono. Blue stops being a field
+      and becomes <b>the structure lines</b>. This is the only direction that resolves as a genuine
+      <b>light + dark pair</b> — off-white "drawing" mode and dark "screen" mode — which, per the brief, would
+      be built as one page that themes, with a footer toggle. <b>Risk:</b> can tip into engineering-dashboard if
+      the display face isn't given enough presence.</p>
+
+      <p class="sub">Palette — roles (light / dark)</p>
+      <div class="swatches">
+        <div class="sw"><div class="fill" style="background:linear-gradient(90deg,#F2F3EE 50%,#0F1020 50%)"></div>
+          <div class="info"><span class="hex">#F2F3EE / #0F1020</span><span class="role">Ground</span><span class="use">Drawing paper / screen</span></div></div>
+        <div class="sw"><div class="fill" style="background:linear-gradient(90deg,#14152E 50%,#F4F4FB 50%)"></div>
+          <div class="info"><span class="hex">#14152E / #F4F4FB</span><span class="role">Ink</span><span class="use">Type in both modes</span></div></div>
+        <div class="sw"><div class="fill" style="background:#4346EB"></div>
+          <div class="info"><span class="hex">#4346EB</span><span class="role">Structure</span><span class="use">Grid lines, rules, diagram strokes</span></div></div>
+        <div class="sw"><div class="fill" style="background:#E3EB8F"></div>
+          <div class="info"><span class="hex">#E3EB8F</span><span class="role">Live</span><span class="use">Active/current state, impact figures</span></div></div>
+        <div class="sw"><div class="fill" style="background:#A1A2F5"></div>
+          <div class="info"><span class="hex">#A1A2F5</span><span class="role">Dim</span><span class="use">Labels, units, axis text</span></div></div>
+        <div class="sw"><div class="fill" style="background:linear-gradient(90deg,#D8D9D0 50%,#2C2D4C 50%)"></div>
+          <div class="info"><span class="hex">#D8D9D0 / #2C2D4C</span><span class="role">Rule-quiet</span><span class="use">Derived; the visible grid itself</span></div></div>
+      </div>
+
+      <p class="sub">Type — three genuinely different answers</p>
+      <div class="pairs">
+
+        <article class="pair">
+          <p class="tag">03·A</p>
+          <p class="names">Bricolage Grotesque <span>+ Hanken Grotesk + DM Mono</span></p>
+          <span class="cat">Structural display</span>
+          <h3 class="spec-h" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:38px;letter-spacing:-.03em">Sukmaji Kumoro</h3>
+          <p class="spec-sub" style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.02em">
+            <s style="opacity:.5">Architectural</s> <s style="opacity:.5">Industrial</s> <s style="opacity:.5">Interface</s> <b>Designer</b></p>
+          <p class="spec-b" style="font-family:'Hanken Grotesk',sans-serif">Airport vs nation-wide GTV penetration
+          jumped from <span style="font-family:'DM Mono',monospace;background:#E3EB8F;padding:0 3px">9% → 22.3%</span>.</p>
+          <p class="why"><b>Built, not drawn.</b> Bricolage's optical-size axis was designed for exactly this —
+          tight and structural at display size, humane at small. DM Mono earns its place on real material:
+          percentages, p.p. deltas, date ranges, headcounts.</p>
+        </article>
+
+        <article class="pair">
+          <p class="tag">03·B</p>
+          <p class="names">Archivo <span>+ Petrona-class serif body</span></p>
+          <span class="cat">Neo-grotesk · engineered</span>
+          <h3 class="spec-h" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:36px;letter-spacing:-.035em;text-transform:uppercase">Sukmaji Kumoro</h3>
+          <p class="spec-sub" style="font-family:'DM Mono',monospace;font-size:12px">
+            <s style="opacity:.5">Architectural</s> <s style="opacity:.5">Industrial</s> <s style="opacity:.5">Interface</s> <b>Designer</b></p>
+          <p class="spec-b" style="font-family:'Literata',Georgia,serif">Airport vs nation-wide GTV penetration
+          jumped from <span style="font-family:'DM Mono',monospace;background:#E3EB8F;padding:0 3px">9% → 22.3%</span>.</p>
+          <p class="why"><b>The most severe of the nine.</b> Set-in-caps grotesk wordmark, serif for argument,
+          mono for data — a three-voice system with very clear rules about which voice speaks when. Loses the
+          italic entirely, which is a real cost against the reference.</p>
+        </article>
+
+        <article class="pair">
+          <p class="tag">03·C</p>
+          <p class="names">Faustina <span>+ Chivo + DM Mono</span></p>
+          <span class="cat">Humanist serif on a technical grid</span>
+          <h3 class="spec-h" style="font-family:'Faustina',Georgia,serif;font-style:italic;font-weight:600;font-size:44px">Sukmaji Kumoro</h3>
+          <p class="spec-sub" style="font-family:'DM Mono',monospace;font-size:12px">
+            <s style="opacity:.5">Architectural</s> <s style="opacity:.5">Industrial</s> <s style="opacity:.5">Interface</s> <b>Designer</b></p>
+          <p class="spec-b" style="font-family:'Chivo',sans-serif">Airport vs nation-wide GTV penetration jumped
+          from <span style="font-family:'DM Mono',monospace;background:#E3EB8F;padding:0 3px">9% → 22.3%</span>.</p>
+          <p class="why"><b>The warm-blooded version.</b> Keeps the deck's italic as the human voice and lets the
+          grid, rules and mono supply the rigour around it. The friendliest way into this direction, and the
+          easiest to reconcile with Direction 01 if you want to blend.</p>
+        </article>
+
+      </div>
+
+      <p class="sub">Imagery &amp; texture</p>
+      <div class="imagery">
+        <p><b>The grid is the ornament.</b> A 12-column rule set stays faintly visible at section boundaries —
+        columns that actually align with the content, not a decorative overlay. Corners meet properly; rules
+        terminate at the grid, never mid-air. Section numbers sit in the margin as <span style="font-family:var(--mono);color:#C9CAF6">01 / 02 / 03</span>.</p>
+        <p><b>Diagrams get promoted to hero.</b> Your current-flow/proposed-flow blueprint is redrawn in the
+        palette — blue strokes, lavender secondary paths, highlighter on the changed nodes — so it stops being a
+        screenshot and becomes brand material. Impact figures are set as big mono numerals against the grid.</p>
+        <p class="no"><b>Explicitly avoided:</b> blueprint-paper backgrounds, faux-CAD crosshairs, terminal
+        windows, monospace body copy, "scanning" animations. The rigour has to come from real alignment, or the
+        direction is fancy dress.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RECOMMENDATION ============ -->
+  <section class="section" style="border-bottom:0">
+    <div class="wrap">
+      <div class="rec">
+        <h3>My recommendation, and what I need from you</h3>
+        <p><b>Direction 02 “Marked-Up” with pairing 02·B (Crimson Pro + Epilogue)</b>, borrowing one thing from
+        Direction 01: keep a full-bleed <code>#4346EB</code> hero band at the top so the site still opens on the
+        blue wall, then drop to paper for the argument. Reason: your portfolio's substance is long-form —
+        thesis, governance, ethical constraints — and paper carries 2,000 words of that far better than a
+        saturated field does, while the highlighter and strikethrough keep the identity unmistakable.</p>
+        <p><b>If you'd rather stay closest to the deck</b>, take Direction 01 with 01·A. <b>If you want the site
+        to feel like a step forward</b> rather than a translation, Direction 03 with 03·C — and that's the one
+        that gets a real light/dark toggle.</p>
+        <p>Tell me: <b>one direction, one type pairing.</b> You can mix — “02's palette, 03's mono for numbers,
+        01·C's display face” is a legitimate answer. Stage 3 then researches comparable design-leadership
+        portfolios and builds the full responsive homepage from your real content.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;width:100%">
+    <span>Stage 2 of 5 · Moodboard · approved — Direction 02 · 02·B</span>
+    <span><a href="mailto:sukmaji@kumoro.com">sukmaji@kumoro.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

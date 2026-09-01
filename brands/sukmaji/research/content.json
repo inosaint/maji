@@ -1,0 +1,89 @@
+{
+  "source": "Sukmaji Kumoro, Portfolio 2026.pdf (8 pages)",
+  "extracted": "2026-09-01",
+  "identity": {
+    "name": "Sukmaji Kumoro",
+    "email": "sukmaji@kumoro.com",
+    "tagline_device": "strikethrough progression",
+    "tagline": ["Architectural", "Industrial", "Interface", "Designer"],
+    "tagline_note": "First three words are struck through; 'Designer' is the surviving term.",
+    "palette_sampled": {
+      "blue": "#4346EB",
+      "paper": "#FFFFFF",
+      "highlight": "#E3EB8F",
+      "lavender": "#A1A2F5"
+    }
+  },
+  "about": {
+    "since": "2023",
+    "role": "Head of Design, Mobility at Gojek",
+    "groups_overseen": ["Transport", "Cartography Platform", "Drivers Platform", "Fulfillment & Allocation Platform", "Fleet", "GoCorp"],
+    "group_count": 7,
+    "scope": [
+      "Lead 16 Product Designers and UX Writers, including 2 managers.",
+      "Working closely with 7 VP & Head of Products across groups, 6 Head of Businesses, 2 Head of Marketing, 3 Head of Engineering, and the VP of Regions and Operations.",
+      "Accountable for shaping UX strategy, ways of working, growth & culture."
+    ],
+    "achievements": "In my 10+ years with Gojek, I've built and nurtured multiple design organizations including Midtrans—Gojek's fintech arm, Merchants Platform, Ads & Promo Platform, GoFood, and the current Mobility platforms, consistently driving company-level OKRs across SEA (Indonesia, Singapore, Thailand, Vietnam).",
+    "orgs_built": ["Midtrans", "Merchants Platform", "Ads & Promo Platform", "GoFood", "Mobility"],
+    "markets": ["Indonesia", "Singapore", "Thailand", "Vietnam"],
+    "notable_contributions": [
+      "Architect the proliferation of digital payment ecosystem for Indonesia.",
+      "Helped define Gojek designers' career ladder and growth framework.",
+      "Contribute in the initiation, design, code, and nurturing the adoption of Gojek's DLS.",
+      "Set the design principles of Gojek's in-app advertisement.",
+      "Established and led high-friction collaboration models across historically disparate product groups and functions, ensuring holistic initiative strategy."
+    ]
+  },
+  "operating_thesis": [
+    "I believe that design should be founded on ethics. Designers thrives when their participation to solve a problem comes from an internal morality drive and that their cross-functional peers share the same drive.",
+    "I believe in cultivating diversity and welcoming competing points of view. I want my team to challenge each other, debate the fundamentals, delve into the meta, test hypotheses, diverge and converge, and ultimately establish shared principles.",
+    "I believe that leading a design team is as much about shaping minds as it is about shaping products. The organization's maturity is my deliverable."
+  ],
+  "case_studies": [
+    {
+      "number": "01",
+      "title": "Airport Experience",
+      "years": "2023 - 2025",
+      "impact": "38% GTV and 71% CO improvement between 2023-2025. Airport vs nation-wide GTV penetration jumped from 9% to 22.3%.",
+      "role": "Break down historical silos via a design-led end-to-end collaboration model across product groups and across functions. Spearhead the overhaul of OOH experience with Marketing and the inclusion of operations flow and procedures.",
+      "interesting": [
+        "Airports are high-AOV/low-CO bookings, requiring timely and accurate dispatch to happen in complex, site-specific, contexts.",
+        "Product decisions between Consumers flow and Drivers flow was historically disparate. This became a model on how design acted as bridge to ensure holistic experience crafting."
+      ],
+      "assets": ["assets/cs-000.png", "assets/cs-002.png", "assets/cs-004.png", "assets/cs-006.png"],
+      "asset_note": "Current-flow vs proposed-flow service blueprint; in-app queue screen (Terminal 3 Domestik, GoCar Comfort)."
+    },
+    {
+      "number": "02",
+      "title": "GoRide Instant",
+      "years": "2024",
+      "impact": "From 1% pilot BCR, post-release rapid optimization raised the BCR by 40 p.p., pushing it as the strategic backbone for GoRide (2W) in 2026.",
+      "role": "Set the principle definition of Instant and On-demand experiences, highlighting their ethical constraints in relation to public safety and order.",
+      "interesting": [
+        "This project brings Gojek full circle: shifting from dispersed on-demand service back to centralized supply clusters.",
+        "We treated \"public disruption\" (e.g., congestion, crowding) as a primary failure metric to ensure operational stability."
+      ],
+      "assets": ["assets/cs-008.png"]
+    },
+    {
+      "number": "03",
+      "title": "Ads Principles",
+      "years": "2023",
+      "impact": "Designed and shipped a complete redesign of GoFood homepage with embedded highly-contextualized ads within 5 months (May to Sept 2023), putting ads to contribute ~10% of overall GoFood revenue.",
+      "role": "Spearheaded the governance and operationalization of Gojek ads vertical. Codified ethical principles with leadership buy-in.",
+      "interesting": [
+        "The ethical principles we set enforced that we don't abuse ads inventories for short-term gains.",
+        "I created a framework of data-driven creative optimization, delegating effort across functions, which resulted in the creation of a dedicated Ads Operations."
+      ],
+      "assets": ["assets/cs-010.png"]
+    }
+  ],
+  "closing": {
+    "heading": "What's Next?",
+    "paragraphs": [
+      "Last year, my focus was to overhaul the collaboration processes across historically siloed product groups. This reshaped how Gojek thinks about supply & demand problems, centering the focus on improving commitment to the platform, ensuring seamless strategy from OKR definition to tactical execution. This resulted in multiple launched initiatives around cancellation mitigation, loyalty revamps, and pickup experiences.",
+      "The theme for 2026 will be to leverage these improvement points in order to arrive at an anxiety-free order-to-drop-off experience, which eventually will pave the way for Gojek to be every Indonesian on-demand personal assistant."
+    ]
+  }
+}

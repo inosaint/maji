@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brief — Sukmaji Kumoro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Faustina:ital,wght@0,400;0,600;1,400;1,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#4346EB;
+    --blue-deep:#2B2ECB;
+    --lavender:#A1A2F5;
+    --highlight:#E3EB8F;
+    --paper:#FFFFFF;
+    --ink:#141534;
+    --rule:rgba(255,255,255,.28);
+    --serif:"Faustina",Palatino,"Palatino Linotype",Georgia,serif;
+    --sans:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--blue);color:var(--paper);font-family:var(--sans);
+       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+  /* ---------- stepper topbar ---------- */
+  .topbar{position:sticky;top:0;z-index:20;background:var(--blue);
+          border-bottom:1px solid var(--rule)}
+  .topbar .wrap{display:flex;align-items:center;gap:20px;
+                min-height:60px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .mark{font-family:var(--serif);font-style:italic;font-weight:600;
+        font-size:19px;letter-spacing:-.01em;white-space:nowrap;color:var(--paper);
+        text-decoration:none}
+  .mark:hover{color:var(--highlight)}
+  .steps{display:flex;gap:6px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+  .steps a,.steps span{display:block;font-size:11.5px;letter-spacing:.08em;
+        text-transform:uppercase;font-weight:500;padding:6px 11px;border-radius:999px;
+        text-decoration:none;border:1px solid transparent;transition:.18s}
+  .steps .active span{background:var(--highlight);color:var(--ink);font-weight:600}
+  .steps .done a{color:var(--paper);border-color:var(--rule)}
+  .steps .done a:hover{background:var(--paper);color:var(--blue);border-color:var(--paper)}
+  .steps .todo span{color:var(--lavender);border-color:rgba(255,255,255,.16);
+        opacity:.75;cursor:default}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding:76px 0 60px;border-bottom:1px solid var(--rule)}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+           color:var(--highlight);font-weight:600;margin:0 0 26px}
+  h1{font-family:var(--serif);font-style:italic;font-weight:600;
+     font-size:clamp(46px,9vw,104px);line-height:.94;letter-spacing:-.025em;margin:0}
+  .strike{display:block;font-family:var(--serif);font-style:normal;font-weight:400;
+          font-size:clamp(17px,2.6vw,26px);margin-top:26px;color:var(--lavender)}
+  .strike s{text-decoration-thickness:1.5px}
+  .strike b{color:var(--paper);font-weight:600}
+  .meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:40px;
+        font-size:13px;color:var(--lavender)}
+  .meta b{display:block;color:var(--paper);font-weight:500;font-size:14px;margin-top:3px}
+
+  /* ---------- brief cards ---------- */
+  .section{padding:64px 0}
+  .section-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+                 font-weight:600;color:var(--highlight);margin:0 0 30px}
+  .cards{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .card{background:var(--paper);color:var(--ink);border-radius:4px;padding:30px 28px 32px;
+        display:flex;flex-direction:column}
+  .card.wide{grid-column:1/-1}
+  .card h2{font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;
+           text-transform:uppercase;font-weight:600;color:var(--blue);margin:0 0 18px;
+           padding-bottom:14px;border-bottom:1px solid rgba(20,21,52,.14)}
+  .card p{margin:0 0 14px;font-size:15px;line-height:1.62;color:#2A2B4A}
+  .card p:last-child{margin-bottom:0}
+  .lede{font-family:var(--serif);font-size:clamp(19px,2.4vw,25px);line-height:1.42;
+        color:var(--ink);margin:0 0 18px}
+  .lede em{font-style:italic}
+  mark{background:var(--highlight);color:var(--ink);padding:0 .12em}
+  .card ul{margin:0;padding-left:18px}
+  .card li{font-size:14.5px;line-height:1.55;margin-bottom:9px;color:#2A2B4A}
+  .card li:last-child{margin-bottom:0}
+  .card li b{color:var(--ink);font-weight:600}
+
+  /* tone keyword card */
+  .tone{background:var(--highlight);color:var(--ink)}
+  .tone h2{color:var(--blue-deep);border-bottom-color:rgba(20,21,52,.2)}
+  .keyword{font-family:var(--serif);font-style:italic;font-weight:600;
+           font-size:clamp(34px,5.6vw,52px);line-height:1.02;letter-spacing:-.02em;
+           margin:0 0 20px}
+  .tone p{color:#2E3010}
+  .tone .gloss{border-top:1px solid rgba(20,21,52,.2);margin-top:20px;padding-top:16px;
+               font-size:13.5px}
+
+  /* quote block */
+  .quote{border-left:3px solid var(--highlight);padding:6px 0 6px 24px;margin:0}
+  .quote p{font-family:var(--serif);font-style:italic;
+           font-size:clamp(20px,3vw,30px);line-height:1.36;margin:0;color:var(--paper)}
+  .quote cite{display:block;margin-top:16px;font-family:var(--sans);font-style:normal;
+              font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--lavender)}
+
+  /* proof strip */
+  .proof{display:grid;gap:1px;background:var(--rule);
+         grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+         border:1px solid var(--rule)}
+  .stat{background:var(--blue);padding:26px 24px}
+  .stat .n{font-family:var(--serif);font-weight:600;font-size:38px;line-height:1;
+           letter-spacing:-.02em;display:block}
+  .stat .t{display:block;margin-top:10px;font-size:13px;color:var(--lavender);line-height:1.45}
+
+  /* next / footer */
+  .next{border-top:1px solid var(--rule);padding:44px 0 80px}
+  .next h3{font-family:var(--serif);font-size:24px;font-weight:600;margin:0 0 12px}
+  .next p{max-width:62ch;color:var(--lavender);margin:0 0 8px;font-size:14.5px}
+  .next code{background:rgba(255,255,255,.12);padding:2px 6px;border-radius:3px;
+             font-size:13px;color:var(--paper)}
+  .foot{border-top:1px solid var(--rule);padding:22px 0 40px;font-size:12px;
+        color:var(--lavender);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .foot a{color:var(--lavender)}
+  .foot a:hover{color:var(--paper)}
+
+  @media (max-width:620px){
+    .masthead{padding:48px 0 40px}
+    .section{padding:44px 0}
+    .card{padding:24px 22px 26px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="../../../index.html">Sukmaji&nbsp;Kumoro</a>
+    <ol class="steps">
+      <li class="active"><span>1 · Brief</span></li>
+      <li class="done"><a href="moodboard.html">2 · Moodboard</a></li>
+      <li class="done"><a href="explorations.html">3 · Mockup</a></li>
+      <li class="todo"><span>4 · System</span></li>
+      <li class="todo"><span>5 · Teaser</span></li>
+    </ol>
+  </div>
+</header>
+
+<main>
+  <section class="masthead">
+    <div class="wrap">
+      <p class="eyebrow">Stage 1 — Positioning Brief</p>
+      <h1>Sukmaji<br>Kumoro</h1>
+      <p class="strike">
+        <s>Architectural</s> <s>Industrial</s> <s>Interface</s> <b>Designer</b>
+      </p>
+      <div class="meta">
+        <span>Source<b>Portfolio 2026 (8pp PDF)</b></span>
+        <span>Contact<b>sukmaji@kumoro.com</b></span>
+        <span>Current role<b>Head of Design, Mobility — Gojek</b></span>
+        <span>Tenure<b>10+ years</b></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="section-label">The brief</p>
+      <div class="cards">
+
+        <article class="card wide">
+          <h2>Positioning statement</h2>
+          <p class="lede">Sukmaji Kumoro is a design leader whose deliverable is not a screen but an
+          <em>organization</em> — someone who builds the collaboration structures that let large,
+          historically siloed product groups ship one coherent experience.</p>
+          <p>Over ten-plus years at Gojek he has founded or rebuilt five design organizations —
+          Midtrans, Merchants Platform, Ads &amp; Promo, GoFood, and now Mobility — and the pattern
+          across all of them is the same: he treats <mark>the seams between teams</mark> as the real
+          design surface. Airport dispatch failed because consumer flow and driver flow were owned by
+          different groups. Ads risked abuse because nobody had written down what the platform would
+          refuse to do. In each case the artifact he shipped was a working model of collaboration, and
+          the metric moved as a consequence.</p>
+          <p>The site should therefore read as the portfolio of an <b>infrastructure thinker</b>, not a
+          UI showcase. Case studies lead with the structural problem and the ethical constraint;
+          the screens are evidence, not the argument.</p>
+        </article>
+
+        <article class="card">
+          <h2>Primary audience</h2>
+          <p><b>Executive hiring principals</b> — founders, CPOs, and heads of product at scaled
+          consumer platforms (SEA-first, but not SEA-only) evaluating someone for VP/Head of Design.
+          They read fast, distrust polish, and want to know within one screen what he is accountable
+          for and what moved.</p>
+          <p>They need: scope in headcount and business units, named cross-functional counterparts,
+          and outcome numbers with dates attached.</p>
+        </article>
+
+        <article class="card">
+          <h2>Secondary audiences</h2>
+          <p><b>Senior designers weighing a team.</b> The Operating Thesis is the recruiting document —
+          ethics as foundation, competing viewpoints as a requirement, "the organization's maturity is
+          my deliverable." Give it real estate, not a footer.</p>
+          <p><b>Peers and the wider design community</b> — conference programmers, podcast hosts,
+          people who encounter him through the career-ladder and DLS work. They arrive for one idea
+          and should leave with a way to reach him.</p>
+        </article>
+
+        <article class="card tone">
+          <h2>Tone keyword</h2>
+          <p class="keyword">Structural candour</p>
+          <p><b>Structural</b> — the arc of his own self-description (<s>architectural</s>
+          <s>industrial</s> <s>interface</s> designer) is a person who keeps rebuilding the frame.
+          The site should feel load-bearing: visible grid, honest rules, sections that hold weight
+          rather than float.</p>
+          <p><b>Candour</b> — he names failure metrics ("public disruption"), refusals ("we don't abuse
+          ads inventories for short-term gains"), and unglamorous work (procedures, operations flow).
+          No superlatives, no hero-shot mystique.</p>
+          <p class="gloss">Discipline for every later stage: if a visual move is decorative rather than
+          structural, or a line of copy claims more than the portfolio actually says, it fails the
+          keyword and gets cut.</p>
+        </article>
+
+        <article class="card wide">
+          <h2>What the site must carry</h2>
+          <ul>
+            <li><b>Scope, stated plainly.</b> 7 product groups, 16 designers and UX writers, 2 managers,
+            and the counterpart map — 7 VP/Head of Product, 6 Head of Business, 2 Head of Marketing,
+            3 Head of Engineering, plus the VP of Regions &amp; Operations.</li>
+            <li><b>Three case studies, structured identically.</b> Airport Experience (2023–25),
+            GoRide Instant (2024), Ads Principles (2023) — each as Impact / Role / What's interesting,
+            because that repetition is itself the argument that he works one consistent way.</li>
+            <li><b>The Operating Thesis as a first-class section</b>, not an About footnote.</li>
+            <li><b>A forward-looking close.</b> The 2026 theme — an anxiety-free order-to-drop-off
+            experience — makes the portfolio a plan rather than a résumé.</li>
+            <li><b>One contact route:</b> sukmaji@kumoro.com. Nothing else competes with it.</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <blockquote class="quote">
+        <p>“I believe that leading a design team is as much about shaping minds as it is about shaping
+        products. The organization’s maturity is my deliverable.”</p>
+        <cite>Operating Thesis — Portfolio 2026</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <p class="section-label">Proof available (all from the source PDF)</p>
+      <div class="proof">
+        <div class="stat"><span class="n">38%</span><span class="t">GTV improvement, airport experience, 2023–2025</span></div>
+        <div class="stat"><span class="n">9 → 22.3%</span><span class="t">Airport vs nation-wide GTV penetration</span></div>
+        <div class="stat"><span class="n">+40 p.p.</span><span class="t">GoRide Instant BCR after post-release optimization</span></div>
+        <div class="stat"><span class="n">~10%</span><span class="t">Of GoFood revenue from contextual ads, shipped in 5 months</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="next">
+    <div class="wrap">
+      <h3>Before Stage 2 — your reference images</h3>
+      <p>I've created <code>brands/sukmaji/research/inspiration/</code> and opened it. Drop in anything
+      visual you already have: an existing wordmark or logo file, photos of you, screenshots of sites
+      whose feel you want, textures, competitor or peer portfolios — anything that should steer the
+      moodboard.</p>
+      <p>Colour is already anchored to your real identity (the blue, the highlighter yellow-green and
+      the lavender are sampled straight from the PDF). <b>Type is deliberately still open</b> — Stage 2
+      will put up genuinely different typeface options, not variations of the one in the deck.</p>
+      <p>When you've added files — or if there's nothing to add — say so and I'll build the moodboard.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;width:100%">
+    <span>Stage 1 of 5 · Brief · approved</span>
+    <span><a href="mailto:sukmaji@kumoro.com">sukmaji@kumoro.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
